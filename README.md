@@ -5,18 +5,19 @@ This repository implements an OSEK-like, bare-metal
 operating system for Raspberry Pi Zero (ARM1176JZF-S).
 
 Features include:
-  - bare-metal startup using the RPI's standard `kernel.img` file on SD card.
-  - power and port initialization,
+  - OSEK-like OS implementation with support of most common features.
+  - Sample application featuring tasks and events interacting to produce blinky at 1/2 Hz on the user LED.
+  - Bare-metal startup using the RPI's standard `kernel.img` file on SD card.
+  - Power and port initialization.
   - 1ms timebase derived from the low 32-bit `clo` register of the BCM's 64-bit timer.
-  - blinky LED at 1/2 Hz on the user LED,
-  - implementation in C99 with absolute minimal use of assembly.
+  - Implementation in C99 with absolute minimal use of assembly.
 
 A clear and easy-to-understand build system based on GNUmake
 completes this fun and educational project.
 
-This repository provides keen insight on starting writing
-a _bare_ _metal_ operating system from scratch on a modern
-microcontroller.
+This repository provides keen insight on writing your own
+_bare_ _metal_ operating system from scratch on a modern
+microcontroller using entirely free tools and open standards.
 
 ## Details on the Application
 
