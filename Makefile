@@ -123,11 +123,10 @@ SRC_FILES :=  $(SRC_DIR)/Appli/main                                    \
 ############################################################################################
 INC_FILES :=  $(SRC_DIR)/Osek                                          \
               $(SRC_DIR)/Osek/HwPlatform/ARM11                         \
-              $(SRC_DIR)/mcal/gpio                                     \
-              $(SRC_DIR)/mcal/gpt                                      \
-              $(SRC_DIR)/mcal/mcu                                      \
-              $(SRC_DIR)/Std                                           \
-              $(SRC_DIR)
+              $(SRC_DIR)/Mcal/gpio                                     \
+              $(SRC_DIR)/Mcal/gpt                                      \
+              $(SRC_DIR)/Mcal/mcu                                      \
+              $(SRC_DIR)/Std
 
 ############################################################################################
 # Rules
