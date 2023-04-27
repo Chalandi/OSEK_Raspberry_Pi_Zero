@@ -22,7 +22,7 @@ OBJ_DIR    = $(CURDIR)/Tmp/Obj
 
 SRC_DIR    = $(CURDIR)
 
-LD_SCRIPT  = $(SRC_DIR)/startup/Memory_Map.ld
+LD_SCRIPT  = $(SRC_DIR)/Startup/Memory_Map.ld
 
 ############################################################################################
 # Toolchain
