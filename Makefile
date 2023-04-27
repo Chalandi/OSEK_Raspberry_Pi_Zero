@@ -25,12 +25,6 @@ SRC_DIR    = $(CURDIR)
 LD_SCRIPT  = $(SRC_DIR)/startup/Memory_Map.ld
 
 ############################################################################################
-# Variant
-############################################################################################
-EXECUTE_CODE_FROM_ITCM  = -DVARIANT_EXECUTE_CODE_FROM_ITCM
-EXECUTE_CODE_FROM_FLASH = -DVARIANT_EXECUTE_CODE_FROM_FLASH
-
-############################################################################################
 # Toolchain
 ############################################################################################
 
@@ -41,8 +35,6 @@ LD      = arm-none-eabi-g++
 OBJDUMP = arm-none-eabi-objdump
 OBJCOPY = arm-none-eabi-objcopy
 READELF = arm-none-eabi-readelf
-
-PYTHON = python
 
 ############################################################################################
 # GCC Compiler verbose flags
@@ -170,17 +162,17 @@ clean :
 $(OBJ_DIR)/%.o : %.c
 	@-echo +++ compile: $(subst \,/,$<) to $(subst \,/,$@)
 	@-$(CC) $(COPS) $(addprefix -I, $(INC_FILES)) -c $< -o $(OBJ_DIR)/$(basename $(@F)).o 2> $(OBJ_DIR)/$(basename $(@F)).err
-	@-$(PYTHON) CompilerErrorFormater.py $(OBJ_DIR)/$(basename $(@F)).err -COLOR
+	@-cat $(OBJ_DIR)/$(basename $(@F)).err
 
 $(OBJ_DIR)/%.o : %.s
 	@-echo +++ compile: $(subst \,/,$<) to $(subst \,/,$@)
 	@$(AS) $(ASOPS) -c $< -o $(OBJ_DIR)/$(basename $(@F)).o 2> $(OBJ_DIR)/$(basename $(@F)).err >$(OBJ_DIR)/$(basename $(@F)).lst
-	@-$(PYTHON) CompilerErrorFormater.py $(OBJ_DIR)/$(basename $(@F)).err -COLOR
+	@-cat $(OBJ_DIR)/$(basename $(@F)).err
 
 $(OBJ_DIR)/%.o : %.cpp
 	@-echo +++ compile: $(subst \,/,$<) to $(subst \,/,$@)
 	@$(CPP) $(CPPOPS) $(addprefix -I, $(INC_FILES)) -c $< -o $(OBJ_DIR)/$(basename $(@F)).o 2> $(OBJ_DIR)/$(basename $(@F)).err
-	@-$(PYTHON) CompilerErrorFormater.py $(OBJ_DIR)/$(basename $(@F)).err -COLOR
+	@-cat $(OBJ_DIR)/$(basename $(@F)).err
 
 $(OUTPUT_DIR)/$(PRJ_NAME).elf : $(FILES_O)
 	@$(LD) $(LOPS) $(FILES_O) -o $(OUTPUT_DIR)/$(PRJ_NAME).elf
