@@ -28,6 +28,9 @@
 *******************************************************************************************************************/
 __attribute__((naked)) void Mcu_WriteBcm2835Register(uint32 address, uint32 value)
 {
+  (void) address;
+  (void) value;
+
   __asm volatile("mov r2, #0");
   __asm volatile("mcr p15,0,r2,c7,c10,5"); /* Data Memory Barrier Operation */
   __asm volatile("str r1, [r0]");
@@ -42,6 +45,8 @@ __attribute__((naked)) void Mcu_WriteBcm2835Register(uint32 address, uint32 valu
 *******************************************************************************************************************/
 __attribute__((naked)) uint32 Mcu_ReadBcm2835Register(uint32 address)
 {
+  (void) address;
+
   __asm volatile("mov r2, #0");
   __asm volatile("ldr r0, [r0]");
   __asm volatile("mcr p15,0,r2,c7,c10,5"); /* Data Memory Barrier Operation */
