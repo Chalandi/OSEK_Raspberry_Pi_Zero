@@ -55,6 +55,7 @@ OPS_BASE     = -Wall                                          \
                -mtune=arm1176jzf-s                            \
                -mfpu=vfpv2                                    \
                -mfloat-abi=hard                               \
+               -fomit-frame-pointer                           \
                -gdwarf-2
 
 COPS         = -x c                                           \
@@ -67,7 +68,6 @@ COPS         = -x c                                           \
 CPPOPS       = -x c++                                         \
                $(OPS_BASE)                                    \
                -std=c++14                                     \
-               -fomit-frame-pointer                           \
                -fno-exceptions                                \
                -fno-rtti                                      \
                -fno-use-cxa-atexit                            \
