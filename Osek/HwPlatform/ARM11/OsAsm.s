@@ -41,8 +41,12 @@
   mov r0,sp                     /* prepare the input parameter for the function OS_Dispatcher       */
   cps #0x13                     /* Switch back to SVC mode                                          */
   stmfd r0!, {lr}               /* Save R14_SVC (user mode Return @) on the user stack              */
+  mrs r1, spsr                  /* save the content of the spsr into r1                             */
+  stmfd r0!, {r1}               /* Save SPSR_SVC (user mode CPSR) on the user stack                 */
   bl  OS_Dispatcher             /* Call the dispatcher to switch the context                        */
   mov sp, r0                    /* Use the returned stack pointer                                   */
+  ldmfd sp!, {r1}               /* restore the saved cpsr register value                            */
+  msr spsr, r1                  /* update the cpsr of the current mode                              */
   ldmfd sp!, {lr}               /* Restore R14_SVC (user mode Return @) register                    */
   ldmfd sp, {lr}^               /* Restore lr register                                              */
   add sp, sp, #4                /* adding 4 to the stack pointer value                              */
@@ -114,11 +118,15 @@
   mov r1, lr                    /* copy R14_irq into r1                                             */
   sub r1, r1, #4                /* subtract 4 from the value of the R14_irq because ARM11 added 4   */
   stmfd r0!, {r1}               /* Save R14_irq (user mode Return @) on the user stack              */
+  mrs r1, spsr                  /* save the content of the spsr into r1                             */
+  stmfd r0!, {r1}               /* Save SPSR_irq (user mode CPSR) on the user stack                 */
   bl OsStoreStackPointer        /* Save the stack pointer of the current task                       */
   bl OsSysTickTimerIsr          /* Call the ISR (lookup table)                                      */
   bl OsGetSavedStackPointer     /* Restore the stack pointer of the current task                    */
   bl OsIsrCallDispatch          /* Call dispatcher if needed                                        */
   mov sp, r0                    /* Use the returned stack pointer                                   */
+  ldmfd sp!, {r1}               /* restore the saved cpsr register value                            */
+  msr spsr, r1                  /* update the cpsr of the current mode                              */
   ldmfd sp!, {lr}               /* Restore R14_irq (user mode Return @) register                    */
   ldmfd sp, {lr}^               /* Restore lr register                                              */
   add sp, sp, #4                /* adding 4 to the stack pointer value                              */
@@ -156,11 +164,15 @@
   mov r1, lr                    /* copy R14_irq into r1                                             */
   sub r1, r1, #4                /* subtract 4 from the value of the R14_irq because ARM11 added 4   */
   stmfd r0!, {r1}               /* Save R14_fiq (user mode Return @) on the user stack              */
+  mrs r1, spsr                  /* save the content of the spsr into r1                             */
+  stmfd r0!, {r1}               /* Save SPSR_fiq (user mode CPSR) on the user stack                 */
   bl OsStoreStackPointer        /* Save the stack pointer of the current task                       */
   bl OsSysTickTimerIsr          /* Call the system timer interrupt                                  */
   bl OsGetSavedStackPointer     /* Restore the stack pointer of the current task                    */
   bl OsIsrCallDispatch          /* Call dispatcher if needed                                        */
   mov sp, r0                    /* Use the returned stack pointer                                   */
+  ldmfd sp!, {r1}               /* restore the saved cpsr register value                            */
+  msr spsr, r1                  /* update the cpsr of the current mode                              */
   ldmfd sp!, {lr}               /* Restore R14_fiq (user mode Return @) register                    */
   ldmfd sp, {lr}^               /* Restore lr register                                              */
   add sp, sp, #4                /* adding 4 to the stack pointer value                              */
