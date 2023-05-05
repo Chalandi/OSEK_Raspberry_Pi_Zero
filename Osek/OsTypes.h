@@ -23,9 +23,9 @@
 
 typedef void (*pTaskFunc)(void);
 
-typedef enum 
+typedef enum
 {
-  PRE_READY = 0,
+  PRE_READY,
   READY,
   WAITING,
   RUNNING,
@@ -34,20 +34,20 @@ typedef enum
 }OsTaskStateType;
 
 
-typedef enum 
+typedef enum
 {
-  BASIC = 0,
+  BASIC,
   EXTENDED
 }OsTasksType;
 
-typedef enum 
+typedef enum
 {
-  NONE_PREEMPT = 0,
+  NONE_PREEMPT,
   FULL_PREEMPT
 }OsTasksSchedType;
 
 
-typedef enum 
+typedef enum
 {
   E_OK                       = 0,
   E_OS_ACCESS                = 1,
@@ -77,7 +77,7 @@ typedef enum
 
 typedef enum
 {
-  ALARM_SET_EVENT = 0,
+  ALARM_SET_EVENT,
   ALARM_ACTIVE_TASK,
   ALARM_CALLBACK
   
@@ -85,19 +85,19 @@ typedef enum
 
 typedef enum
 {
-  ALARM_FREE = 0,
+  ALARM_FREE,
   ALARM_USED
 }AlarmStatus;
 
 typedef enum
 {
-  ALARM_ONE_SHOT = 0,
+  ALARM_ONE_SHOT,
   ALARM_CYCLIC
 }AlarmTypes;
 
 typedef enum
 {
-  ALARM_RELATIVE = 0,
+  ALARM_RELATIVE,
   ALARM_ABSOLUTE
 }AlarmCatgys;
 
@@ -124,8 +124,8 @@ typedef struct
   volatile const uint32      pstack_bot;
   volatile uint32            pCurrentStackPointer;
   volatile OsTaskStateType   TaskStatus;
-  volatile uint32            Prio;  
-  volatile uint32            CeilingPrio;  
+  volatile uint32            Prio;
+  volatile uint32            CeilingPrio;
   volatile uint32            SetEvtMask;
   volatile uint32            WaitEvtMask;
   volatile uint32            NbOfActiv;
@@ -143,7 +143,7 @@ typedef struct
   const uint32                    AutoStart;
   volatile AlarmStatus            Status;
   volatile AlarmTypes             Alarmtype;
-  volatile AlarmCatgys            AlarmCategory;  
+  volatile AlarmCatgys            AlarmCategory;
   volatile OsTickType             AlarmCheckPoint;
   volatile pTaskFunc              CallBackFunc;
 }Alarm_t;
@@ -160,10 +160,10 @@ typedef Alarm_t** OsAlarmBaseRefType;
 typedef struct
 {
            Tcb_t**       pTcb;
-           Alarm_t**     pAlarm;  
+           Alarm_t**     pAlarm;
            Resource_t**  pRes;
   volatile uint32        OsIsRunning;
-  volatile uint32        HighPrioReadyTaskIdx;  
+  volatile uint32        HighPrioReadyTaskIdx;
   volatile uint32        CurrentTaskIdx;
   volatile uint64        OsSysTickCounter;
   volatile uint32        OsIsrCallDispatcher;
@@ -193,7 +193,6 @@ typedef struct
 #define TSTACK(x,y) (uint32)(&Stack_T_##x[(y/4)-1])
 #define BSTACK(x)   (uint32)(&Stack_T_##x[0])
 
-  
 #define OS_DeclareTask(TaskId)
 #define OS_DeclareResource(ResId)
 #define OS_DeclareEvent(Event)
