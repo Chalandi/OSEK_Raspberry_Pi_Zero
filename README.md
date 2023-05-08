@@ -3,7 +3,7 @@ OSEK_Raspberry_Pi_Zero
 
 <p align="center">
     <a href="https://github.com/chalandi/OSEK_Raspberry_Pi_Zero/actions">
-        <img src="https://github.com/chalandi/OSEK_Raspberry_Pi_Zero/actions/workflows/pi-crunch-metal.yml/badge.svg" alt="Build Status"></a>
+        <img src="https://github.com/chalandi/OSEK_Raspberry_Pi_Zero/actions/workflows/OSEK_Raspberry_Pi_Zero.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/chalandi/OSEK_Raspberry_Pi_Zero/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">
         <img src="https://custom-icon-badges.herokuapp.com/github/issues-raw/chalandi/OSEK_Raspberry_Pi_Zero?logo=github" alt="Issues" /></a>
     <a href="https://github.com/chalandi/OSEK_Raspberry_Pi_Zero/blob/master/LICENSE_1_0.txt">
