@@ -76,8 +76,8 @@
 
 #ifdef OS_INTERRUPT_BEGIN
 #undef OS_INTERRUPT_BEGIN
-#endif 
-        
+#endif
+
 #ifdef OS_INTERRUPT_CAT2_DEF
 #undef OS_INTERRUPT_CAT2_DEF
 #endif
@@ -88,8 +88,8 @@
 
 #ifdef OS_FE_INTERRUPT_BEGIN
 #undef OS_FE_INTERRUPT_BEGIN
-#endif 
-        
+#endif
+
 #ifdef OS_FE_INTERRUPT_CAT2_DEF
 #undef OS_FE_INTERRUPT_CAT2_DEF
 #endif
@@ -127,20 +127,20 @@
 #define NB_OF_ALARMS INVALID_ALARM
 
 #define OS_RESOURCE_BEGIN                                                        enum{
-#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...)                     Name,
+#define OS_RESOURCE_DEF(Name,CeilingPrio,...)                                    Name,
 #define OS_RESOURCE_END                                                          INVALID_RESOURCE};
 
 #define NB_OF_RESOURCE INVALID_RESOURCE
 
 #define OS_INTERRUPT_BEGIN                                                      enum{
 #define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)                                   IsrFunc,
-#define OS_INTERRUPT_END                                                        INVALID_ISR};                                                       
+#define OS_INTERRUPT_END                                                        INVALID_ISR};
 
 #define NB_OF_ISR INVALID_ISR
 
-#define OS_FE_INTERRUPT_BEGIN                                                   
-#define OS_FE_INTERRUPT_CAT2_DEF(FeIsrFunc)                                     
-#define OS_FE_INTERRUPT_END                                                     
+#define OS_FE_INTERRUPT_BEGIN
+#define OS_FE_INTERRUPT_CAT2_DEF(FeIsrFunc)
+#define OS_FE_INTERRUPT_END
 
 #define NB_OF_FE_ISR INVALID_FE_ISR
 
@@ -150,32 +150,32 @@
 
 #define OS_CONFIG_BEGIN
 
-#define OS_TASK_BEGIN                                                            
-#define OS_TASK_DEF(Name,Prio,StackSize,NbOfActiv,AutoStart,TaskType,SchedType)  
-#define OS_TASK_END                                                              
+#define OS_TASK_BEGIN
+#define OS_TASK_DEF(Name,Prio,StackSize,NbOfActiv,AutoStart,TaskType,SchedType)
+#define OS_TASK_END
 
 
-#define OS_EVENT_BEGIN                                                           
-#define OS_EVENT_DEF(Event, Mask)                                                
-#define OS_EVENT_END                                                             
+#define OS_EVENT_BEGIN
+#define OS_EVENT_DEF(Event, Mask)
+#define OS_EVENT_END
 
 
 
-#define OS_ALARM_BEGIN                                                           
+#define OS_ALARM_BEGIN
 #define OS_ALARM_DEF(Name,Action,Event,task,Callback)
 #define OS_ALARM_AUTO_DEF(Name,Increment,Cycle,Action,Event,task,Callback)
-#define OS_ALARM_END                                                             
+#define OS_ALARM_END
 
 
 
-#define OS_RESOURCE_BEGIN                                                        
-#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...)                     
-#define OS_RESOURCE_END                                                          
+#define OS_RESOURCE_BEGIN
+#define OS_RESOURCE_DEF(Name,CeilingPrio,...)
+#define OS_RESOURCE_END
 
 
 #define OS_INTERRUPT_BEGIN                                                      extern const Isr_t IsrLookupTable[];
 #define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)                                   extern void Os##IsrFunc##Isr(void);
-#define OS_INTERRUPT_END                                                         
+#define OS_INTERRUPT_END
 
 #define OS_FE_INTERRUPT_BEGIN                                                   extern const FeIsr_t FeIntLookupTable[];
 #define OS_FE_INTERRUPT_CAT2_DEF(FeIsrFunc)                                     extern void Os##FeIsrFunc##Isr(void);
@@ -201,7 +201,7 @@
 #define OS_ALARM_END
 
 #define OS_RESOURCE_BEGIN
-#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...) static uint32 AuthorizedTask_##Name[NB_OF_TASKS] = AuthorizedTasks; static Resource_t Resource_##Name = {CeilingPrio, INVALID_TASK, &AuthorizedTask_##Name[0]};
+#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...)                static uint32 AuthorizedTask_##Name[NB_OF_TASKS] = AuthorizedTasks; static Resource_t Resource_##Name = {CeilingPrio, INVALID_TASK, &AuthorizedTask_##Name[0]};
 #define OS_RESOURCE_END
 
 #define OS_INTERRUPT_BEGIN                                                       const Isr_t IsrLookupTable[] = {
@@ -210,7 +210,7 @@
 
 #define OS_FE_INTERRUPT_BEGIN                                                    const FeIsr_t FeIntLookupTable[] = {
 #define OS_FE_INTERRUPT_CAT2_DEF(FeIsrFunc)                                      &Os##FeIsrFunc##Isr,
-#define OS_FE_INTERRUPT_END                                                      }; 
+#define OS_FE_INTERRUPT_END                                                      };
 
 #define OS_CONFIG_END
 
@@ -232,25 +232,25 @@
 #define OS_ALARM_END                                                                0};
 
 #define OS_RESOURCE_BEGIN                                                           static Resource_t* Res_Cfg[NB_OF_RESOURCE + 1]={
-#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...)                        &Resource_##Name,
+#define OS_RESOURCE_DEF(Name,CeilingPrio,...)                                       &Resource_##Name,
 #define OS_RESOURCE_END                                                             0};
 
 #define OS_INTERRUPT_BEGIN
-#define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)                                      
+#define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)
 #define OS_INTERRUPT_END
 
 #define OS_FE_INTERRUPT_BEGIN
 #define OS_FE_INTERRUPT_CAT2_DEF(FeIsrFunc)
-#define OS_FE_INTERRUPT_END  
+#define OS_FE_INTERRUPT_END
 
 #define OS_CONFIG_END
 
 #elif defined(OS_GEN_OCB)
 
-#define OS_CONFIG_BEGIN                                                           volatile Ocb_t OCB_Cfg = { 
+#define OS_CONFIG_BEGIN                                                           volatile Ocb_t OCB_Cfg = {
 
 #define OS_TASK_BEGIN                                                             &CCB_Cfg[0],
-#define OS_TASK_DEF(Name,Prio,StackSize,NbOfActiv,AutoStart,TaskType,SchedType)  
+#define OS_TASK_DEF(Name,Prio,StackSize,NbOfActiv,AutoStart,TaskType,SchedType)
 #define OS_TASK_END
 
 #define OS_EVENT_BEGIN
@@ -263,11 +263,11 @@
 #define OS_ALARM_END
 
 #define OS_RESOURCE_BEGIN                                                         &Res_Cfg[0],
-#define OS_RESOURCE_DEF(Name,CeilingPrio,AuthorizedTasks...)                     
+#define OS_RESOURCE_DEF(Name,CeilingPrio,...)
 #define OS_RESOURCE_END
 
 #define OS_INTERRUPT_BEGIN
-#define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)                                    
+#define OS_INTERRUPT_CAT2_DEF(IsrNbr,IsrFunc)
 #define OS_INTERRUPT_END
 
 #define OS_FE_INTERRUPT_BEGIN
@@ -300,6 +300,3 @@
 #ifdef OS_GEN_OCB
 #undef OS_GEN_OCB
 #endif
-
-
-

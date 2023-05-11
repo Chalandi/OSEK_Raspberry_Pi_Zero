@@ -1,7 +1,7 @@
 // ******************************************************************************************************
 // Filename    : TCB.c
 // 
-// OS          : OSEK 2.2.3  
+// OS          : OSEK 2.2.3
 // 
 // CC          : ECC1/BCC1
 //
@@ -15,8 +15,12 @@
 // 
 // ******************************************************************************************************
 
-#include"TCB.h"
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
+#endif
 
+#include"TCB.h"
 
 /***************************************************/
 /*            X Macro System Generation            */
@@ -34,3 +38,6 @@
 #include"OsCfg.h"
 #undef OS_GEN_OCB
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
