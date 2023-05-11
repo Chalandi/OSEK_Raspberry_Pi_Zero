@@ -1,7 +1,7 @@
 // *****************************************************************************
 // Filename    : OsAPIs.h
 // 
-// OS          : OSEK 2.2.3  
+// OS          : OSEK 2.2.3
 // 
 // CC          : ECC1/BCC1
 //
@@ -70,4 +70,3 @@ uint64 OsGetSystemTicksElapsedTime(uint64 prvTicks);
 void osErrTaskExitWithoutTerminate(void);
 
 #endif
-
